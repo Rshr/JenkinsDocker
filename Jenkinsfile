@@ -4,13 +4,15 @@ node('DOTNETCORE'){
 	}
 	stage('Build'){
 		try{
-		sh 'dotnet build ConsoleApp1'
+			sh 'dotnet build ConsoleApp1'
 		}finally{
 		archiveArtifacts artifacts: 'ConsoleApp1/*.*'
 		}
 	}
 	stage('Test'){
-		echo 'Execute unit tests'
+		try{
+			sh 'dotnet run'
+		}
 	}
 	stage('Package'){
 		echo 'Zip it up'
